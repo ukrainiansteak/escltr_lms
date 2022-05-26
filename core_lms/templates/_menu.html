@@ -1,0 +1,33 @@
+{% load static %}
+<div>
+    <ul>
+        {% if user.is_authenticated %}
+            <li>
+                {% if user.image %}
+                    <img src="{{ user.image.url }}">
+                {% else %}
+                    <img class="profile-image" id="small-profile-image" src="{% static 'images/avatar.png' %}">
+                {% endif %}
+            </li>
+            <li>
+                <a href="{% url 'accounts:profile' %}">{{ user.first_name }}'s Profile</a>
+            </li>
+            <li>
+                <a href={% url 'accounts:logout' %}>Sign Out</a>
+            </li>
+        {% else %}
+            <li>
+                <a href={% url 'accounts:register' %}>Register</a>
+            </li>
+            <li>
+                <a href={% url 'accounts:login' %}>Sign In</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+
+
+
+
+
+

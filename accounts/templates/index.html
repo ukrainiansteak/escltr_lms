@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>escltr lms</title>
-</head>
-<body>
-{% if messages %}
-    {% for message in messages %}
-        <p {% if message.tags %} class="alert alert-{{ message.tags }}" role="alert" {% endif %}>
-            {{ message }}
-        </p>
-    {% endfor %}
-{% endif %}
+{% extends '_base.html' %}
 
+{% block main %}
 Hello
-<a href="{% url 'accounts:register' %}"> Register </a>
-<a href="{% url 'accounts:login' %}"> Login </a>
-</body>
-</html>
+{% endblock %}

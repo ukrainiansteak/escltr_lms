@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% block title %}
+            <title>escltr lms</title>
+    {% endblock %}
+
+</head>
+<body>
+    <p>
+        {% include '_menu.html' %}
+    </p>
+    <div>
+        {% include '_messages.html' %}
+        {% block main %}
+            <H1>Welcome to LMS</h1>
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
@@ -50,3 +51,20 @@ class Profile(AbstractUser):
         ]
     )
     objects = UserManager()
+
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
+        if self.avatar:
+            with Image.open(self.avatar) as im:
+                if self.avatar.width > self.avatar.height:
+                    width = 300
+                    height = round(self.avatar.height * (width / self.avatar.width))
+                elif self.avatar.width < self.avatar.height:
+                    height = 300
+                    width = round(self.avatar.width * (height / self.avatar.height))
+                else:
+                    width = 300
+                    height = 300
+                path = self.avatar.path
+                self.image = im.resize((width, height), Image.ANTIALIAS)
+                self.image.save(path)

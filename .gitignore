@@ -5,4 +5,5 @@ media
 .idea
 lib
 bin
-.pyc
+*.pyc
+__pycache__
