@@ -16,4 +16,3 @@ class Student(models.Model):
         blank=True,
         max_length=150
     )
-
