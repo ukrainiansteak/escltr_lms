@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from faker import Faker
 
 
 class UserManager(BaseUserManager):
@@ -47,7 +48,7 @@ class Profile(AbstractUser):
         upload_to='pics/',
         blank=True,
         validators=[
-            FileExtensionValidator(['jpg', 'png'])
+            FileExtensionValidator(['jpg', 'png', 'jpeg'])
         ]
     )
     objects = UserManager()
@@ -68,3 +69,17 @@ class Profile(AbstractUser):
                 path = self.avatar.path
                 self.image = im.resize((width, height), Image.ANTIALIAS)
                 self.image.save(path)
+
+    @classmethod
+    def create_account(cls, count=1):
+        faker = Faker()
+        for _ in range(count):
+            p = Profile()
+            p.email = faker.email()
+            p.username = p.email
+            p.first_name = faker.first_name()
+            p.last_name = faker.last_name()
+            p.password = faker.password(length=20)
+
+            p.save()
+            return p

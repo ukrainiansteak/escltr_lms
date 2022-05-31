@@ -1,4 +1,7 @@
 from django.db import models
+from faker import Faker
+
+import accounts.models
 
 
 class Student(models.Model):
@@ -16,3 +19,13 @@ class Student(models.Model):
         blank=True,
         max_length=150
     )
+
+    @classmethod
+    def generate_students(cls, count):
+        faker = Faker()
+        for _ in range(count):
+            s = Student()
+            s.profile = accounts.models.Profile.create_account()
+            s.phone_number = faker.phone_number()
+
+            s.save()
