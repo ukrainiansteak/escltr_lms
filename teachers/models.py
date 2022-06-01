@@ -4,11 +4,11 @@ from faker import Faker
 import accounts.models
 
 
-class Student(models.Model):
+class Teacher(models.Model):
     profile = models.OneToOneField(
         to='accounts.Profile',
         on_delete=models.CASCADE,
-        related_name="student"
+        related_name="teacher"
     )
     phone_number = models.CharField(
         null=True,
@@ -21,11 +21,11 @@ class Student(models.Model):
     )
 
     @classmethod
-    def generate_students(cls, count):
+    def generate_teachers(cls, count):
         faker = Faker()
         for _ in range(count):
-            s = Student()
-            s.profile = accounts.models.Profile.create_account()
-            s.phone_number = faker.phone_number()
+            t = Teacher()
+            t.profile = accounts.models.Profile.create_account()
+            t.phone_number = faker.phone_number()
 
-            s.save()
+            t.save()

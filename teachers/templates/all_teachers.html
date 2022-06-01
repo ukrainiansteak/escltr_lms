@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    <title>All teachers</title>
+{% endblock %}
+{% block main %}
+    {% for object in object_list %}
+        <p> {{ object.profile.first_name }} {{ object.profile.last_name }}</p>
+    {% endfor %}
+{% endblock %}

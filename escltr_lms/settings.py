@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'core_lms',
     'students',
+    'teachers',
+
 ]
 
 MIDDLEWARE = [
