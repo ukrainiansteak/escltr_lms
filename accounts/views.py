@@ -8,7 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, TemplateView
 
-from accounts.forms import AccountRegisterForm, UserEditForm
+from accounts.forms import AccountRegisterForm, UserEditForm, TeacherProfileEditForm, StudentProfileEditForm
 from accounts.models import Profile
 
 from django.contrib.auth import get_user_model
@@ -54,12 +54,20 @@ class AccountEdit(LoginRequiredMixin, View):
         user = request.user
         user_form = UserEditForm(instance=user)
 
+        context = dict()
+        context['user_form'] = user_form
+
+        if user.teacher:
+            teacher_form = TeacherProfileEditForm()
+            context['teacher_form'] = teacher_form
+        elif user.student:
+            student_form = StudentProfileEditForm()
+            context['student_form'] = student_form
+
         return render(
             request,
             'profile.html',
-            context={
-                'user_form': user_form,
-            }
+            context,
         )
 
     def post(self, request, *args, **kwargs):

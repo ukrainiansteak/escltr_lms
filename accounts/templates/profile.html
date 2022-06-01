@@ -16,6 +16,14 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ user_form }}
+        {% if student_form %}
+            Student Form:
+            {{ student_form }}
+        {% endif %}
+        {% if teacher_form %}
+            Teacher Form:
+            {{ teacher_form }}
+        {% endif %}
         <p><button style="margin-top: 7px"  type="submit" class="btn btn-primary btn-sm">
             Update Account</button></p>
     </form>

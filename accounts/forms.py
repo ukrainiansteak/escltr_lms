@@ -1,6 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm
 from django.urls import reverse_lazy
+
+from students.models import Student
+from teachers.models import Teacher
 
 
 class AccountRegisterForm(UserCreationForm):
@@ -22,3 +26,15 @@ class UserEditForm(UserChangeForm):
                 '../password/', kwargs.pop(reverse_lazy(
                     'accounts:change_password'), './password')
             )
+
+
+class StudentProfileEditForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ['phone_number', 'linkedin_profile']
+
+
+class TeacherProfileEditForm(ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['phone_number', 'linkedin_profile']
