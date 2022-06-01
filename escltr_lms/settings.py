@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'core_lms',
     'students',
     'teachers',
+    'courses',
+
 
 ]
 
