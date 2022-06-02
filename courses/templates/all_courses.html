@@ -5,6 +5,6 @@
 {% endblock %}
 {% block main %}
     {% for object in object_list %}
-        <p> {{ object.name }} {{ object.start_date }} {{ object.end_date }}</p>
+        <p> <a href="{% url 'courses:course' id=object.id %}"> {{ object.name }} </a> {{ object.start_date }} {{ object.end_date }}</p>
     {% endfor %}
 {% endblock %}

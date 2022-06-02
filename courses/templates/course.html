@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+{% block title %}
+    <title>View group</title>
+{% endblock %}
+
+{% block main %}
+    Group <a href="{% url 'courses:course' id=object.id %}"> {{ object.name }} </a>
+    {{ object.start_date }}
+    {{ object.end_date }}
+    Students:
+    {% for student in object.students.all %}
+        {{ student.profile.first_name }}
+        {{ student.profile.last_name }}
+    {% endfor %}
+
+    Teachers:
+    {% for teacher in object.teachers.all %}
+        {{ teacher.profile.first_name }}
+        {{ teacher.profile.last_name }}
+    {% endfor %}
+
+    Lessons:
+    {% for lesson in object.lessons.all %}
+        {{ lesson.name }}
+    {% endfor %}
+
+    Assignments:
+    {% for assignment in object.assignments.all %}
+        {{ assignment.name }}
+    {% endfor %}
+
+{% endblock %}
