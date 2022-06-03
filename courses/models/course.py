@@ -1,3 +1,5 @@
+from PIL import Image
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
@@ -11,3 +13,20 @@ class Course(models.Model):
     teachers = models.ManyToManyField(to='teachers.Teacher',
                                       related_name='courses'
                                       )
+    cover = models.ImageField(
+        null=True,
+        upload_to='covers/',
+        blank=True,
+        validators=[
+            FileExtensionValidator(['jpg', 'png', 'jpeg'])
+        ])
+
+    def save(self, *args, **kwargs):
+        super(Course, self).save(*args, **kwargs)
+        if self.cover:
+            with Image.open(self.сover) as im:
+                width = 640
+                height = 360
+                path = self.сover.path
+                self.image = im.resize((width, height), Image.ANTIALIAS)
+                self.image.save(path)
