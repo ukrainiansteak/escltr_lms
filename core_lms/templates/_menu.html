@@ -1,33 +1,42 @@
 {% load static %}
-<div>
-    <ul>
-        {% if user.is_authenticated %}
-            <li>
-                {% if user.image %}
-                    <img src="{{ user.image.url }}">
-                {% else %}
-                    <img class="profile-image" id="small-profile-image" src="{% static 'images/avatar.png' %}">
-                {% endif %}
+
+<nav class="navbar navbar-expand-lg bg-success p-2 text-white">
+  <div class="container-fluid">
+    <a class="navbar-brand link-light" href="{% url 'accounts:index' %}">escltr lms</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        </ul>
+      <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="link-light" href="{% url 'accounts:profile' %}">
+                    {% if user.avatar %}
+                        <img id="small-profile-image" class="rounded-circle" src="{{ user.avatar.url }}">
+                    {% else %}
+                        <img class="profile-image rounded-circle" id="small-profile-image" src="{% static 'images/avatar.png' %}">
+                    {% endif %}
+                </a>
             </li>
-            <li>
-                <a href="{% url 'accounts:profile' %}">{{ user.first_name }}'s Profile</a>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'accounts:profile' %}">{{ user.first_name }}'s Profile</a>
             </li>
-            <li>
-                <a href={% url 'accounts:logout' %}>Sign Out</a>
+            <li class="nav-item">
+                <a class="nav-link link-light" href={% url 'accounts:logout' %}>Sign Out</a>
             </li>
         {% else %}
-            <li>
-                <a href={% url 'accounts:register' %}>Register</a>
+            <li class="nav-item">
+                <a class="nav-link link-light" href={% url 'accounts:register' %}>Register</a>
             </li>
-            <li>
-                <a href={% url 'accounts:login' %}>Sign In</a>
+            <li class="nav-item">
+                <a class="nav-link link-light" href={% url 'accounts:login' %}>Sign In</a>
             </li>
         {% endif %}
-    </ul>
-</div>
-
-
-
-
-
+      </ul>
+    </div>
+  </div>
+</nav>
 
