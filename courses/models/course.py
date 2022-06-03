@@ -24,9 +24,10 @@ class Course(models.Model):
     def save(self, *args, **kwargs):
         super(Course, self).save(*args, **kwargs)
         if self.cover:
-            with Image.open(self.сover) as im:
+            cover = self.cover
+            with Image.open(cover) as im:
                 width = 640
                 height = 360
-                path = self.сover.path
-                self.image = im.resize((width, height), Image.ANTIALIAS)
-                self.image.save(path)
+                path = self.cover.path
+                self.cover = im.resize((width, height), Image.ANTIALIAS)
+                self.cover.save(path)

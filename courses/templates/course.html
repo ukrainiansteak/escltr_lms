@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block main %}
+    <a href="{% url "courses:create_lesson" %}">Create lesson</a>
     Group <a href="{% url 'courses:course' id=object.id %}"> {{ object.name }} </a>
     {{ object.start_date }}
     {{ object.end_date }}

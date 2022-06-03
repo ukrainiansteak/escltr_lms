@@ -4,7 +4,21 @@
     <title>All courses</title>
 {% endblock %}
 {% block main %}
-    {% for object in object_list %}
-        <p> <a href="{% url 'courses:course' id=object.id %}"> {{ object.name }} </a> {{ object.start_date }} {{ object.end_date }}</p>
-    {% endfor %}
+    <div class="row row-cols-3 row-cols-md-4 g-4">
+        {% for object in object_list %}
+            <div class="col">
+                <div class="card h-100" style="width: 18rem;">
+                {% if object.cover %}
+                    <img src="{{ object.cover.url }}" class="card-img-top" alt="...">
+                {% else %}
+                    <img src="https://www.placecage.com/640/360" class="card-img-top" alt="...">
+                {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'courses:course' id=object.id %}">{{ object.name }}</a></h5>
+                    <p class="card-text">{{ object.start_date }} - {{ object.end_date }}</p>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

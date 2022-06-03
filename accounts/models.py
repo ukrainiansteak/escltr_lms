@@ -67,8 +67,8 @@ class Profile(AbstractUser):
                     width = 300
                     height = 300
                 path = self.avatar.path
-                self.image = im.resize((width, height), Image.ANTIALIAS)
-                self.image.save(path)
+                self.avatar = im.resize((width, height), Image.ANTIALIAS)
+                self.avatar.save(path)
 
     @classmethod
     def create_account(cls, count=1):

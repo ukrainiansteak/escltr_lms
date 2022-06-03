@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <title>Create lesson</title>
+{% endblock %}
+
+{% block main %}
+    {{ lesson_form|crispy }}
+    {{ file_form|crispy }}
+{% endblock %}
