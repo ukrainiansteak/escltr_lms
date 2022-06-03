@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
     {% block title %}
@@ -6,23 +7,23 @@
     {% endblock %}
 
 {% block main %}
-    <div class="profile-image">
+    <div class="profile-image ">
         {% if user.avatar %}
-            <img src="{{ user.avatar.url }}">
+            <img class="rounded-circle" src="{{ user.avatar.url }}">
         {% else %}
-            <img src="{% static 'images/avatar.png' %}">
+            <img class="rounded-circle" src="{% static 'images/avatar.png' %}">
         {% endif %}
     </div>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form }}
+        {{ user_form|crispy }}
         {% if student_form %}
             Student Form:
-            {{ student_form }}
+            {{ student_form|crispy }}
         {% endif %}
         {% if teacher_form %}
             Teacher Form:
-            {{ teacher_form }}
+            {{ teacher_form|crispy }}
         {% endif %}
         <p><button style="margin-top: 7px"  type="submit" class="btn btn-primary btn-sm">
             Update Account</button></p>
