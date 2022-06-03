@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView
 
 from courses.forms import LessonCreateForm, FileFieldForm
-from courses.models import Course, Lesson
+from courses.models import Course
 
 
 class AllCoursesView(ListView):
@@ -32,6 +32,8 @@ class CreateLessonView(View):
                 'file_form': file_form,
             },
         )
+
+    # todo: define post method
 
     # def post(self, request, *args, **kwargs):
     #     lesson_form = LessonCreateForm(
@@ -63,4 +65,3 @@ class CreateLessonView(View):
     #         return self.form_invalid(form)
     #
     # pass
-
