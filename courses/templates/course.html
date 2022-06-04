@@ -36,9 +36,14 @@
             <div id="flush-collapse{{ lesson.id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ lesson.id }}" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     {{ lesson.description }}
+                    {% for file in lesson.files.all %}
+                        <a href="{{ file.file.url }}">{{ file.file.name|cut:'files/' }}</a>
+                        <br>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+        <br>
     {% endfor %}
     </div>
     <br>

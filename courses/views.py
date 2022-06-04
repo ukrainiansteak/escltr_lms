@@ -35,7 +35,6 @@ class CreateLessonView(View):
             },
         )
 
-
     def post(self, request, *args, **kwargs):
         form = LessonCreateForm(
             data=request.POST,
@@ -50,4 +49,3 @@ class CreateLessonView(View):
                 f.object_id = form.instance.id
                 f.save()
             return redirect(reverse('courses:all_courses'))
-

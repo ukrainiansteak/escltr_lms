@@ -15,8 +15,7 @@ class File(models.Model):
                                     'fb2', 'xml'])
         ]
     )
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
-                                     related_name='files')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     uploaded = models.DateTimeField(auto_now_add=True)
