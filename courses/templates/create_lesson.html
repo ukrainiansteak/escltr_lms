@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block main %}
-    {{ lesson_form|crispy }}
-    {{ file_form|crispy }}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ lesson_form|crispy }}
+        {% csrf_token %}
+        {{ file_form|crispy }}
+        <p>
+            <button style="margin-top: 7px"  type="submit" class="btn btn-primary btn-sm">
+        Create Lesson</button>
+        </p>
+    </form>
 {% endblock %}

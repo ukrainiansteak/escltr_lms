@@ -10,4 +10,4 @@ class LessonCreateForm(ModelForm):
 
 
 class FileFieldForm(Form):
-    file_field = FileField(widget=ClearableFileInput(attrs={'multiple': True}))
+    file_field = FileField(required=False, widget=ClearableFileInput(attrs={'multiple': True}))

@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView
 
 from courses.forms import LessonCreateForm, FileFieldForm
-from courses.models import Course
+from courses.models import Course, File
 
 
 class AllCoursesView(ListView):
@@ -33,35 +35,19 @@ class CreateLessonView(View):
             },
         )
 
-    # todo: define post method
 
-    # def post(self, request, *args, **kwargs):
-    #     lesson_form = LessonCreateForm(
-    #         data=request.POST,
-    #         )
-    #     file_form = FileFieldForm(
-    #         files=request.FILES
-    #     )
-    #
-    #     return render(
-    #         request,
-    #         'create_lesson.html',
-    #         context={
-    #             'lesson_form': lesson_form,
-    #             'file_form': file_form,
-    #         },
-    #     )
-    # success_url = ''
-    #
-    # def post(self, request, *args, **kwargs):
-    #     form_class = self.get_form_class()
-    #     form = self.get_form(form_class)
-    #     files = request.FILES.getlist('file_field')
-    #     if form.is_valid():
-    #         for f in files:
-    #             ...  # Do something with each file.
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(form)
-    #
-    # pass
+    def post(self, request, *args, **kwargs):
+        form = LessonCreateForm(
+            data=request.POST,
+            )
+        files = request.FILES.getlist('file_field')
+        if form.is_valid():
+            form.save()
+            for file in files:
+                f = File()
+                f.file = file
+                f.content_type = ContentType.objects.get(app_label='courses', model='lesson')
+                f.object_id = form.instance.id
+                f.save()
+            return redirect(reverse('courses:all_courses'))
+

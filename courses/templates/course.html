@@ -5,29 +5,59 @@
 
 {% block main %}
     <a href="{% url "courses:create_lesson" %}">Create lesson</a>
+    <br>
     Group <a href="{% url 'courses:course' id=object.id %}"> {{ object.name }} </a>
     {{ object.start_date }}
     {{ object.end_date }}
+    <br>
     Students:
     {% for student in object.students.all %}
         {{ student.profile.first_name }}
         {{ student.profile.last_name }}
     {% endfor %}
-
+    <br>
     Teachers:
     {% for teacher in object.teachers.all %}
         {{ teacher.profile.first_name }}
         {{ teacher.profile.last_name }}
     {% endfor %}
+    <br>
+
 
     Lessons:
+    <div class="accordion accordion-flush" id="accordionFlushExample">
     {% for lesson in object.lessons.all %}
-        {{ lesson.name }}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-{{ lesson.id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ lesson.id }}" aria-expanded="false" aria-controls="flush-collapse{{ lesson.id }}">
+                    {{ lesson.name }}
+                </button>
+            </h2>
+            <div id="flush-collapse{{ lesson.id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ lesson.id }}" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    {{ lesson.description }}
+                </div>
+            </div>
+        </div>
     {% endfor %}
-
+    </div>
+    <br>
     Assignments:
-    {% for assignment in object.assignments.all %}
-        {{ assignment.name }}
-    {% endfor %}
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        {% for assignment in object.assignments.all %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-{{ lesson.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ lesson.id }}" aria-expanded="false" aria-controls="flush-collapse{{ lesson.id }}">
+                        {{ assignment.name }}
+                    </button>
+                </h2>
+                <div id="flush-collapse{{ lesson.id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ lesson.id }}" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        {{ assignment.description }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
